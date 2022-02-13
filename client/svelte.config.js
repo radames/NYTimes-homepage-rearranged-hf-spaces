@@ -4,6 +4,9 @@ const dev = process.env.NODE_ENV === 'development';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
+		vite: {
+			server: { fs: "allow" },
+		},
 		paths: {
 			base: dev ? '/static' : '/gradioiframe/Rad/NYTimes-homepage-rearranged/static',
 			assets: '',

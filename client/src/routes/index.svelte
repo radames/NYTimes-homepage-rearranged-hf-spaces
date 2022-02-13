@@ -2,7 +2,9 @@
 	const fecthPredictions = fetch('news').then((d) => d.json());
 </script>
 
-<h1>The New York Times Homepage</h1>
+<h1 class="text-3xl font-bold">
+	The New York Times Homepage
+</h1>
 
 {#await fecthPredictions}
 	<p>Loading and running sentiment analysis on the latest news...</p>
