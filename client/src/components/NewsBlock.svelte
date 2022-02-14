@@ -18,7 +18,7 @@
 		<div class="text-sm">
 			Score:
 			<span class="font-bold {feedEntry.sentiment > 0 ? 'text-emerald-600' : 'text-red-600'}">
-				{feedEntry.sentiment.toFixed(3)}
+				{feedEntry.sentiment.toFixed(4)}
 			</span>
 		</div>
 

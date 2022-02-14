@@ -11,9 +11,9 @@
 			// hack to develop locally without having to run the server
 			predictions = await fetch('static/test.json').then((d) => d.json());
 		}
-		lastUpdate = predictions.last_update;
+		lastUpdate = new Date(predictions.last_update);
 		predictions = predictions.entries.sort((a, b) => b.sentiment - a.sentiment);
-		console.log(predictions);
+		console.log(lastUpdate, predictions);
 	}
 
 	function toggleOrder() {
@@ -25,23 +25,33 @@
 </script>
 
 <div class="px-6 py-3 max-w-4xl mx-auto">
-	<h1 class="text-4xl font-bold font-serif py-5 leading-tight">The New York Times Homepage</h1>
+	<h1 class="text-4xl font-bold font-serif pt-5 leading-tight">The New York Times Homepage</h1>
+	<h3 class="text-sm leading-tight pb-5 {lastUpdate ? 'visibile' : 'invisible'}">
+		<b>Last Update:</b>
+		{lastUpdate ? lastUpdate.toLocaleString() : ''}
+	</h3>
 
 	<button
-		class="{positiveOrder ? 'bg-emerald-600' :'bg-red-600'} bg-blue-500 hover:bg-zinc-300 text-white font-bold py-2 px-4 rounded"
+		class="{positiveOrder
+			? 'bg-emerald-600'
+			: 'bg-red-600'} hover:bg-zinc-300 text-white font-bold py-2 px-4 rounded"
 		on:click={toggleOrder}
 	>
 		{!positiveOrder ? 'Sorted by negative' : 'Sorted by positive'}
 	</button>
-
 	{#await fecthPredictions()}
-		<p>Loading and running sentiment analysis on the latest news...</p>
+		<div class="py-4">
+			<svg class="animate-spin inline-block" width="25" height="25" viewBox="0 0 100 100">
+				<path d="M0,50 a1,1 0 0,0 100,0" fill="lightgrey" />
+			</svg>
+			Loading the NYTimes homepage feed and running sentiment analysis on titles...
+		</div>
 	{:then data}
 		<ul>
 			{#each predictions as entry, i}
 				<li class="py-5">
 					<NewsBlock feedEntry={entry} />
-					<div class="border-b border-gray-200 py-2"></div>
+					<div class="border-b border-gray-200 py-2" />
 				</li>
 			{/each}
 		</ul>
