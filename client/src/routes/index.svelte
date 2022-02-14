@@ -24,14 +24,14 @@
 	}
 </script>
 
-<div class="px-6 max-w-4xl mx-auto">
-	<h1 class="text-3xl font-bold">The New York Times Homepage</h1>
+<div class="px-6 py-3 max-w-4xl mx-auto">
+	<h1 class="text-4xl font-bold font-serif py-5 leading-tight">The New York Times Homepage</h1>
 
 	<button
-		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+		class="{positiveOrder ? 'bg-emerald-600' :'bg-red-600'} bg-blue-500 hover:bg-zinc-300 text-white font-bold py-2 px-4 rounded"
 		on:click={toggleOrder}
 	>
-		Click me
+		{!positiveOrder ? 'Sorted by negative' : 'Sorted by positive'}
 	</button>
 
 	{#await fecthPredictions()}
@@ -39,8 +39,9 @@
 	{:then data}
 		<ul>
 			{#each predictions as entry, i}
-				<li class="py-3">
+				<li class="py-5">
 					<NewsBlock feedEntry={entry} />
+					<div class="border-b border-gray-200 py-2"></div>
 				</li>
 			{/each}
 		</ul>
