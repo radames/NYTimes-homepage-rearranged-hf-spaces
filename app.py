@@ -34,6 +34,8 @@ def get_news():
         cache = {}
 
     # if new homepage is newer than cache, update cache and return
+    print("new date",nyt_homepage['last_update'])
+    print("old date",cache['last_update'])
     if not cache or parser.parse(nyt_homepage['last_update']) > parser.parse(cache['last_update']):
         print("Updating cache with new preditions")
         titles = [entry['title'] for entry in nyt_homepage['entries']]
