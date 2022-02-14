@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="" />
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<link rel="icon" href="/static/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content="">
+	<link rel="stylesheet" href="/static/_app/assets/pages/__layout.svelte-fb585879.css">
+	<link rel="modulepreload" href="/static/_app/start-99eb6447.js">
+	<link rel="modulepreload" href="/static/_app/chunks/vendor-f86405dd.js">
+	<link rel="modulepreload" href="/static/_app/pages/__layout.svelte-edc9d39c.js">
+	<link rel="modulepreload" href="/static/_app/pages/index.svelte-9de47720.js">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.1/iframeResizer.contentWindow.min.js"></script>
+	</head>
+	<body>
+		<div>
+
+
+<h1 class="text-3xl font-bold">The New York Times Homepage
+</h1>
+
+
+	<p>Loading and running sentiment analysis on the latest news...</p>
+
+
+
+		<script type="module" data-hydrate="3zkzse">
+		import { start } from "/static/_app/start-99eb6447.js";
+		start({
+			target: document.querySelector('[data-hydrate="3zkzse"]').parentNode,
+			paths: {"base":"/static","assets":"/static"},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/static/_app/pages/__layout.svelte-edc9d39c.js"),
+						import("/static/_app/pages/index.svelte-9de47720.js")
+				],
+				url: new URL("http://sveltekit-prerender/static"),
+				params: {}
+			}
+		});
+	</script></div>
+	</body>
+</html>
