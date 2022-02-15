@@ -7,7 +7,7 @@
 		{#if feedEntry.media_content}
 			<a target="_blank" href={feedEntry.link}>
 				<img
-					class="w-full max-w-xs object-cover object-top aspect-[4/3]"
+					class="w-full max-w-[15rem] md:max-w-md object-cover object-top aspect-[4/3]"
 					src={feedEntry.media_content[0].url}
 					alt={feedEntry.title}
 				/>

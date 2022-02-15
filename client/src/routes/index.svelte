@@ -27,10 +27,23 @@
 <div class="px-6 py-3 max-w-4xl mx-auto">
 	<h1 class="text-4xl font-bold font-serif pt-5 leading-tight">The New York Times Homepage</h1>
 	<h3 class="text-sm leading-tight pb-5 {lastUpdate ? 'visibile' : 'invisible'}">
-		<b>Last Update:</b>
+		<b>Last Updated:</b>
 		{lastUpdate ? lastUpdate.toLocaleString() : ''}
 	</h3>
 
+	<p class="py-3 max-w-prose leading-normal">
+		This project is an experiment running sentiment analysis on the current
+		<a
+			class="text-blue-500 underline"
+			target="_blank"
+			href="https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml">New York Times</a
+		>
+		homepage RSS headlines feed. It also provides you with a sorting button to choose to see {positiveOrder
+			? 'good or bad news first'
+			: 'bad or good news first'}. It's built with a custom SvelveKit front-end, served by a Flask
+		application and using transformers for the sentiment analysis.
+	</p>
+	<div class="py-5"> </div>
 	<button
 		class="{positiveOrder
 			? 'bg-emerald-600'
@@ -44,7 +57,7 @@
 			<svg class="animate-spin inline-block" width="25" height="25" viewBox="0 0 100 100">
 				<path d="M0,50 a1,1 0 0,0 100,0" fill="lightgrey" />
 			</svg>
-			Loading the NYTimes homepage feed and running sentiment analysis on titles...
+			Loading the NYTimes homepage feed and running sentiment analysis on headlines...
 		</div>
 	{:then data}
 		<ul>
