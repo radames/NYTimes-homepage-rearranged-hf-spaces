@@ -1,18 +1,50 @@
 <script>
 	import NewsBlock from '../components/NewsBlock.svelte';
-
+	let feeds = [
+		{
+			label: 'NYTimes',
+			value: 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml'
+		},
+		{
+			label: 'SF Gate Bay Area',
+			value: 'https://www.sfgate.com/bayarea/feed/Bay-Area-News-429.php'
+		},
+		{
+			label: 'BBC News',
+			value: 'https://feeds.bbci.co.uk/news/rss.xml'
+		},
+		{
+			label: 'Buzz Feed World',
+			value: 'https://www.buzzfeed.com/world.xml'
+		},
+		{
+			label: 'Al Jazeera',
+			value: 'https://aljazeera.com/xml/rss/all.xml'
+		},
+		{
+			label: 'Hacker News Front Page',
+			value: 'https://hnrss.org/frontpage'
+		},
+		{
+			label: 'Reddit World News',
+			value: 'https://www.reddit.com/r/worldnews/.rss'
+		}
+	];
+	let selectedFeedUrl = feeds[0].value;
 	let predictions;
 	let lastUpdate;
 	let positiveOrder = true;
-	async function fecthPredictions() {
+	async function fecthPredictions(feedUrl) {
+		console.log(feedUrl);
 		try {
-			predictions = await fetch('news').then((d) => d.json());
+			predictions = await fetch(`news?feed_url=${feedUrl}`).then((d) => d.json());
 		} catch (e) {
 			// hack to develop locally without having to run the server
 			predictions = await fetch('static/test.json').then((d) => d.json());
 		}
 		lastUpdate = new Date(predictions.last_update);
 		predictions = predictions.entries.sort((a, b) => b.sentiment - a.sentiment);
+		positiveOrder = true
 		console.log(lastUpdate, predictions);
 	}
 
@@ -38,9 +70,9 @@
 			target="_blank"
 			href="https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml">New York Times</a
 		>
-		homepage headlines RSS. It also provides you with a sorting button to choose to see {positiveOrder
-			? 'good or bad news first'
-			: 'bad or good news first'}. It's built with a
+		homepage headlines RSS. It also provides a sorting button to toggle between {positiveOrder
+			? 'good and bad news'
+			: 'bad and good news'} first😛 . It's built with a
 		<a
 			class="text-blue-500 underline hover:no-underline"
 			target="_blank"
@@ -66,9 +98,21 @@
 		</a>
 	</p>
 	<details>
-		<summary class="cursor-pointer"> Details </summary>
-		<p></p>
+		<summary class="cursor-pointer">Notes</summary>
+		<p />
 	</details>
+
+	<p class="py-3 max-w-prose leading-normal">
+		You can try other news feeds <select
+			class="inline-block text-sm bg-gray-200 border border-gray-200 text-gray-700 px-1 py-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+			bind:value={selectedFeedUrl}
+		>
+			{#each feeds as feed (feed.value)}
+				<option value={feed.value}>{feed.label}</option>
+			{/each}
+		</select>; however the NYTimes feed comes with more information than the other feeds, such as
+		the thumbnail image, author, and more.
+	</p>
 	<div class="py-4" />
 	<button
 		class="{positiveOrder
@@ -78,7 +122,7 @@
 	>
 		{!positiveOrder ? 'Sorted by negative scores' : 'Sorted by positive scores'}
 	</button>
-	{#await fecthPredictions()}
+	{#await fecthPredictions(selectedFeedUrl)}
 		<div class="py-4">
 			<svg class="animate-spin inline-block" width="25" height="25" viewBox="0 0 100 100">
 				<path d="M0,50 a1,1 0 0,0 100,0" fill="lightgrey" />

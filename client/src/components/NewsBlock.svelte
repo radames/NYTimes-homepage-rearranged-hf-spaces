@@ -25,7 +25,7 @@
 		<a target="_blank" href={feedEntry.link}>
 			<h2 class="text-2xl font-bold font-serif leading-tight">{feedEntry.title}</h2>
 			<h4 class="text-sm font-bold leading-tight">By {feedEntry.author}</h4>
-			<p class="py-3 max-w-prose leading-normal">{feedEntry.summary}</p>
+			<p class="py-3 max-w-prose leading-normal">{@html feedEntry.summary}</p>
 			<!-- {#if feedEntry.tags}
 				<div class="text-sm">
 					{#each feedEntry.tags as tag}

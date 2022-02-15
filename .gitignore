@@ -24,4 +24,4 @@ htmlcov/
 .coverage.*
 *,cover
 venv
-last_predictions_cache.json
+*_cache.json

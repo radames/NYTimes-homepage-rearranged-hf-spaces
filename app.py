@@ -6,9 +6,7 @@ from transformers import pipeline
 import feedparser
 import json
 from dateutil import parser
-
-nyt_homepage_rss = "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
-
+import re
 load_dotenv()
 # Load Setiment Classifier
 sentiment_analysis = pipeline(
@@ -25,20 +23,27 @@ def index():
 
 @app.route('/news')
 def get_news():
-    nyt_homepage = get_nytimes()
+    feed_url = request.args.get('feed_url')
+    # check if string is a valid
+
+    # file name for cache
+    file_name = "".join(re.split(r"https://|\.|/", feed_url))
+
+    feed_entries = get_feed(feed_url)
     # filter only titles for sentiment analysis
     try:
-        with open('last_predictions_cache.json') as file:
+        with open(f'{file_name}_cache.json') as file:
             cache = json.load(file)
     except:
         cache = {}
 
     # if new homepage is newer than cache, update cache and return
-    print("new date",nyt_homepage['last_update'])
-    print("old date",cache['last_update'] if 'last_update' in cache else "None")
-    if not cache or parser.parse(nyt_homepage['last_update']) > parser.parse(cache['last_update']):
+    print("new date", feed_entries['last_update'])
+    print("old date", cache['last_update']
+          if 'last_update' in cache else "None")
+    if not cache or parser.parse(feed_entries['last_update']) > parser.parse(cache['last_update']):
         print("Updating cache with new preditions")
-        titles = [entry['title'] for entry in nyt_homepage['entries']]
+        titles = [entry['title'] for entry in feed_entries['entries']]
         # run sentiment analysis on titles
         predictions = [sentiment_analysis(sentence) for sentence in titles]
         # parse Negative and Positive, normalize to -1 to 1
@@ -46,11 +51,11 @@ def get_news():
                        'NEGATIVE' else prediction[0]['score'] for prediction in predictions]
         # merge rss data with predictions
         entries_predicitons = [{**entry, 'sentiment': prediction}
-                               for entry, prediction in zip(nyt_homepage['entries'], predictions)]
+                               for entry, prediction in zip(feed_entries['entries'], predictions)]
         output = {'entries': entries_predicitons,
-                  'last_update': nyt_homepage['last_update']}
+                  'last_update': feed_entries['last_update']}
         # update last precitions cache
-        with open('last_predictions_cache.json', 'w') as file:
+        with open(f'{file_name}_cache.json', 'w') as file:
             json.dump(output, file)
         # send back json
         return jsonify(output)
@@ -81,8 +86,8 @@ def predict():
         return jsonify(output)
 
 
-def get_nytimes():
-    feed = feedparser.parse(nyt_homepage_rss)
+def get_feed(feed_url):
+    feed = feedparser.parse(feed_url)
     return {'entries': feed['entries'], 'last_update': feed["feed"]['updated']}
 
 
