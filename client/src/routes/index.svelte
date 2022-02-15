@@ -34,23 +34,49 @@
 	<p class="py-3 max-w-prose leading-normal">
 		This project is an experiment running sentiment analysis on the current
 		<a
-			class="text-blue-500 underline"
+			class="text-blue-500 underline hover:no-underline"
 			target="_blank"
 			href="https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml">New York Times</a
 		>
-		homepage RSS headlines feed. It also provides you with a sorting button to choose to see {positiveOrder
+		homepage headlines RSS. It also provides you with a sorting button to choose to see {positiveOrder
 			? 'good or bad news first'
-			: 'bad or good news first'}. It's built with a custom SvelveKit front-end, served by a Flask
-		application and using transformers for the sentiment analysis.
+			: 'bad or good news first'}. It's built with a
+		<a
+			class="text-blue-500 underline hover:no-underline"
+			target="_blank"
+			href="https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/tree/main/client"
+		>
+			custom SvelveKit front-end
+		</a>
+		, served by a
+		<a
+			class="text-blue-500 underline hover:no-underline"
+			target="_blank"
+			href="https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/blob/main/app.py"
+		>
+			Flask application
+		</a>
+		and using
+		<a
+			class="text-blue-500 underline hover:no-underline"
+			target="_blank"
+			href="https://huggingface.co/siebert/sentiment-roberta-large-english"
+		>
+			transformers pipeline for the sentiment analysis.
+		</a>
 	</p>
-	<div class="py-5"> </div>
+	<details>
+		<summary class="cursor-pointer"> Details </summary>
+		<p></p>
+	</details>
+	<div class="py-4" />
 	<button
 		class="{positiveOrder
 			? 'bg-emerald-600'
 			: 'bg-red-600'} hover:bg-zinc-300 text-white font-bold py-2 px-4 rounded"
 		on:click={toggleOrder}
 	>
-		{!positiveOrder ? 'Sorted by negative' : 'Sorted by positive'}
+		{!positiveOrder ? 'Sorted by negative scores' : 'Sorted by positive scores'}
 	</button>
 	{#await fecthPredictions()}
 		<div class="py-4">
