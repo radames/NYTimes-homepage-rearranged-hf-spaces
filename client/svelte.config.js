@@ -8,7 +8,7 @@ const config = {
 			server: { fs: "allow" },
 		},
 		paths: {
-			base: dev ? '/static' : '/gradioiframe/Rad/NYTimes-homepage-rearranged/static',
+			base: dev ? '/static' : '/gradioiframe/radames/NYTimes-homepage-rearranged/static',
 			assets: '',
 		},
 		appDir: '_app',
