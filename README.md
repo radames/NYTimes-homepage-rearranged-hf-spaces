@@ -1,6 +1,6 @@
 ---
-title: NYTimes Homepage Rearranged
-emoji: 🔥
+title: NYTimes Homepage Sentiment Analysis 
+emoji: 📰
 colorFrom: red
 colorTo: green
 sdk: gradio
