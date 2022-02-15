@@ -44,7 +44,7 @@
 		}
 		lastUpdate = new Date(predictions.last_update);
 		predictions = predictions.entries.sort((a, b) => b.sentiment - a.sentiment);
-		positiveOrder = true
+		positiveOrder = true;
 		console.log(lastUpdate, predictions);
 	}
 
@@ -56,12 +56,12 @@
 	}
 </script>
 
-<div class="px-6 py-3 max-w-4xl mx-auto">
-	<h1 class="text-4xl font-bold font-serif pt-5 leading-tight">The New York Times Homepage</h1>
-	<h3 class="text-sm leading-tight pb-5 {lastUpdate ? 'visibile' : 'invisible'}">
+<article class="prose px-6 py-3 max-w-4xl mx-auto">
+	<h1 class="font-serif mb-0">The New York Times Homepage</h1>
+	<h5 class="mt-0 {lastUpdate ? 'visibile' : 'invisible'}">
 		<b>Last Updated:</b>
 		{lastUpdate ? lastUpdate.toLocaleString() : ''}
-	</h3>
+	</h5>
 
 	<p class="py-3 max-w-prose leading-normal">
 		This project is an experiment running sentiment analysis on the current
@@ -99,12 +99,37 @@
 	</p>
 	<details>
 		<summary class="cursor-pointer">Notes</summary>
-		<p />
+		<h4>Install Node with NVM</h4>
+		<p class="max-w-prose leading-normal">
+			This <a
+				class="text-blue-500 underline hover:no-underline"
+				target="_blank"
+				href="https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/blob/main/install-node.sh"
+				>Node script</a
+			>
+
+			install node LTS and create symbolic links to <code>/home/user/.local/bin/</code> as it seems like we don't
+			have permission to update $PATH env
+		</p>
+		<h4>main.py</h4>
+		<p class="max-w-prose leading-normal">
+			Because the Spaces run a python application, see "app_file" on docs. main.py is just a simple
+			python subprocess to make make", "build-all Makefile
+			https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/blob/main/Makefile
+		</p>
+		<h4>SvelteKit Node Adapter?</h4>
+		<p class="max-w-prose leading-normal">
+			SvelteKit eventually can be used as our primary web application with the
+			@sveltejs/adapter-node with Node and Flask the API application with your ML project. However,
+			there is an open issue to enable dynamic basepath, which blocks the possibility to embedded
+			deployment or relative path. https://github.com/sveltejs/kit/issues/595
+			https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/blob/main/main.py
+		</p>
 	</details>
 
-	<p class="py-3 max-w-prose leading-normal">
+	<p class="max-w-prose leading-normal">
 		You can try other news feeds <select
-			class="inline-block text-sm bg-gray-200 border border-gray-200 text-gray-700 px-1 py-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+			class="inline-block text-xs bg-gray-200 border border-gray-200 text-gray-700 px-0 py-0 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 			bind:value={selectedFeedUrl}
 		>
 			{#each feeds as feed (feed.value)}
@@ -130,7 +155,7 @@
 			Loading the NYTimes homepage feed and running sentiment analysis on headlines...
 		</div>
 	{:then data}
-		<ul>
+		<ul class="m-0 p-0"> 
 			{#each predictions as entry, i}
 				<li class="py-5">
 					<NewsBlock feedEntry={entry} />
@@ -141,4 +166,4 @@
 	{:catch error}
 		<p>An error occurred!</p>
 	{/await}
-</div>
+</article>

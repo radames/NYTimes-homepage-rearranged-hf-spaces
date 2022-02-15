@@ -2,20 +2,26 @@
 	export let feedEntry;
 </script>
 
-<div class="group grid grid-cols-1  sm:grid-cols-3">
+<div class="group grid grid-cols-1 sm:grid-cols-3">
 	<div>
 		{#if feedEntry.media_content}
-			<a target="_blank" href={feedEntry.link}>
+			<a target="_blank"  href={feedEntry.link}>
 				<img
-					class="w-full max-w-[15rem] md:max-w-md object-cover object-top aspect-[4/3]"
+					class="hover:opacity-60 m-0 w-full max-w-[15rem] md:max-w-md object-cover object-top aspect-[4/3]"
 					src={feedEntry.media_content[0].url}
 					alt={feedEntry.title}
 					loading="lazy"
 				/>
 			</a>
+		{:else}
+			<a target="_blank" href={feedEntry.link}>
+				<div
+					class="hover:opacity-60 bg-gray-200 h-full w-full max-w-[15rem] md:max-w-md object-cover object-top aspect-[4/3]"
+				/>
+			</a>
 		{/if}
 	</div>
-	<div class="col-span-2  sm:pl-4">
+	<div class="col-span-2 sm:pl-4">
 		<div class="text-sm">
 			Score:
 			<span class="font-bold {feedEntry.sentiment > 0 ? 'text-emerald-600' : 'text-red-600'}">
@@ -23,10 +29,12 @@
 			</span>
 		</div>
 
-		<a target="_blank" href={feedEntry.link}>
-			<h2 class="text-2xl font-bold font-serif leading-tight">{feedEntry.title}</h2>
-			<h4 class="text-sm font-bold leading-tight">By {feedEntry.author}</h4>
-			<p class="py-3 max-w-prose leading-normal">{@html feedEntry.summary}</p>
+		<a target="_blank" class="no-underline" href={feedEntry.link}>
+			<h2 class="m-0 font-serif leading-tight hover:opacity-50">{feedEntry.title}</h2>
+			<h5 class="mt-1 leading-tight {feedEntry.author ? 'visibile' : 'invisible'}">
+				By {feedEntry.author}
+			</h5>
+			<p class="prose max-w-prose leading-normal prose-gray">{@html feedEntry.summary}</p>
 			<!-- {#if feedEntry.tags}
 				<div class="text-sm">
 					{#each feedEntry.tags as tag}
