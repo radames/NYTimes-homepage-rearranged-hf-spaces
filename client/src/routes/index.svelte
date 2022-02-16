@@ -57,7 +57,7 @@
 </script>
 
 <article class="prose px-6 py-3 max-w-4xl mx-auto">
-	<h1 class="font-serif mb-0">The New York Times Homepage</h1>
+	<h1 class="font-serif mb-0">The New York Times Sentiment Analysis</h1>
 	<h5 class="mt-0 {lastUpdate ? 'visibile' : 'invisible'}">
 		<b>Last Updated:</b>
 		{lastUpdate ? lastUpdate.toLocaleString() : ''}
@@ -108,22 +108,47 @@
 				>Node script</a
 			>
 
-			install node LTS and create symbolic links to <code>/home/user/.local/bin/</code> as it seems like we don't
-			have permission to update $PATH env
+			install node LTS and create symbolic links to <code>/home/user/.local/bin/</code> as it seems like
+			we don't have permission to update $PATH env
 		</p>
 		<h4>main.py</h4>
 		<p class="max-w-prose leading-normal">
-			Because the Spaces run a python application, see "app_file" on docs. main.py is just a simple
-			python subprocess to make make", "build-all Makefile
-			https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/blob/main/Makefile
+			Because the Spaces run a python application, see
+			<a
+				class="text-blue-500 underline hover:no-underline"
+				target="_blank"
+				href="https://huggingface.co/docs/hub/spaces#:~:text=0.88.0%2C%200.89.0%2C%201.0.0.-,app_file,-%3A%20string%0APath%20to"
+			>
+				<code> app_file </code>
+			</a>
+			on docs. <b>main.py</b> is just a simple python subprocess to run
+			<code> make build-all </code>
+			See
+			<a
+				class="text-blue-500 underline hover:no-underline"
+				target="_blank"
+				href="https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/blob/main/Makefile"
+			>
+				<code>Makefile</code>
+			</a>
 		</p>
 		<h4>SvelteKit Node Adapter?</h4>
 		<p class="max-w-prose leading-normal">
-			SvelteKit eventually can be used as our primary web application with the
-			@sveltejs/adapter-node with Node and Flask the API application with your ML project. However,
-			there is an open issue to enable dynamic basepath, which blocks the possibility to embedded
-			deployment or relative path. https://github.com/sveltejs/kit/issues/595
-			https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/blob/main/main.py
+			SvelteKit eventually can be used as our primary web application with
+			<a
+				class="text-blue-500 underline hover:no-underline"
+				target="_blank"
+				href="https://github.com/sveltejs/kit/tree/master/packages/adapter-node"
+			>
+				<code>@sveltejs/adapter-node</code> </a
+			>adaptor and Flask the API application with your ML project. However, there is an unsolved
+			issue to enable
+			<a
+				href="https://github.com/sveltejs/kit/issues/595"
+				class="text-blue-500 underline hover:no-underline"
+			>
+				dynamic basepath</a
+			>, which blocks the possibility to embedded deployment or using a relative path.
 		</p>
 	</details>
 
@@ -155,7 +180,7 @@
 			Loading the NYTimes homepage feed and running sentiment analysis on headlines...
 		</div>
 	{:then data}
-		<ul class="m-0 p-0"> 
+		<ul class="m-0 p-0">
 			{#each predictions as entry, i}
 				<li class="py-5">
 					<NewsBlock feedEntry={entry} />
