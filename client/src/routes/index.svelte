@@ -109,7 +109,7 @@
 			>
 
 			install node LTS and create symbolic links to <code>/home/user/.local/bin/</code> as it seems like
-			we don't have permission to update $PATH env
+			we don't have permission to update <code>$PATH</code> env
 		</p>
 		<h4>main.py</h4>
 		<p class="max-w-prose leading-normal">
@@ -140,8 +140,8 @@
 				target="_blank"
 				href="https://github.com/sveltejs/kit/tree/master/packages/adapter-node"
 			>
-				<code>@sveltejs/adapter-node</code> </a
-			>adaptor and Flask the API application with your ML project. However, there is an unsolved
+				<code>@sveltejs/adapter-node</code></a
+			> adaptor and Flask the API application with your ML project. However, there is an unsolved
 			issue to enable
 			<a
 				href="https://github.com/sveltejs/kit/issues/595"
@@ -177,7 +177,7 @@
 			<svg class="animate-spin inline-block" width="25" height="25" viewBox="0 0 100 100">
 				<path d="M0,50 a1,1 0 0,0 100,0" fill="lightgrey" />
 			</svg>
-			Loading the NYTimes homepage feed and running sentiment analysis on headlines...
+			Loading feed and running sentiment analysis on headlines...
 		</div>
 	{:then data}
 		<ul class="m-0 p-0">
