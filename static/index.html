@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="" />
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<link rel="icon" href="/static/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content="">
+	<link rel="stylesheet" href="/static/_app/assets/pages/__layout.svelte-298a4fd5.css">
+	<link rel="modulepreload" href="/static/_app/start-ad0dbeae.js">
+	<link rel="modulepreload" href="/static/_app/chunks/vendor-528a52ee.js">
+	<link rel="modulepreload" href="/static/_app/pages/__layout.svelte-483b60b6.js">
+	<link rel="modulepreload" href="/static/_app/pages/index.svelte-a06f0dfd.js">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.1/iframeResizer.contentWindow.min.js"></script>
+	</head>
+	<body>
+		<div>
+
+
+<article class="prose px-6 py-3 max-w-4xl mx-auto"><h1 class="font-serif mb-0">The New York Times Sentiment Analysis</h1>
+	<h5 class="mt-0 invisible"><b>Last Updated:</b>
+		</h5>
+
+	<p class="py-3 max-w-prose leading-normal">This project is an experiment running sentiment analysis on the current
+		<a class="text-blue-500 underline hover:no-underline" target="_blank" href="https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml">New York Times</a>
+		homepage headlines RSS. It also provides a sorting button to toggle between good and bad news first😛 . It&#39;s built with a
+		<a class="text-blue-500 underline hover:no-underline" target="_blank" href="https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/tree/main/client">custom SvelveKit front-end
+		</a>
+		, served by a
+		<a class="text-blue-500 underline hover:no-underline" target="_blank" href="https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/blob/main/app.py">Flask application
+		</a>
+		and using
+		<a class="text-blue-500 underline hover:no-underline" target="_blank" href="https://huggingface.co/siebert/sentiment-roberta-large-english">transformers pipeline for the sentiment analysis.
+		</a></p>
+	<details><summary class="cursor-pointer">Notes</summary>
+		<h4>Install Node with NVM</h4>
+		<p class="max-w-prose leading-normal">This <a class="text-blue-500 underline hover:no-underline" target="_blank" href="https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/blob/main/install-node.sh">Node script</a>
+
+			install node LTS and create symbolic links to <code>/home/user/.local/bin/</code> as it seems like
+			we don&#39;t have permission to update <code>$PATH</code> env
+		</p>
+		<h4>main.py</h4>
+		<p class="max-w-prose leading-normal">Because the Spaces run a python application, see
+			<a class="text-blue-500 underline hover:no-underline" target="_blank" href="https://huggingface.co/docs/hub/spaces#:~:text=0.88.0%2C%200.89.0%2C%201.0.0.-,app_file,-%3A%20string%0APath%20to"><code>app_file </code></a>
+			on docs. <b>main.py</b> is just a simple python subprocess to run
+			<code>make build-all </code>
+			See
+			<a class="text-blue-500 underline hover:no-underline" target="_blank" href="https://huggingface.co/spaces/radames/NYTimes-homepage-rearranged/blob/main/Makefile"><code>Makefile</code></a></p>
+		<h4>SvelteKit Node Adapter?</h4>
+		<p class="max-w-prose leading-normal">SvelteKit eventually can be used as our primary web application with
+			<a class="text-blue-500 underline hover:no-underline" target="_blank" href="https://github.com/sveltejs/kit/tree/master/packages/adapter-node"><code>@sveltejs/adapter-node</code></a> adaptor and Flask the API application with your ML project. However, there is an unsolved
+			issue to enable
+			<a href="https://github.com/sveltejs/kit/issues/595" class="text-blue-500 underline hover:no-underline">dynamic basepath</a>, which blocks the possibility to embedded deployment or using a relative path.
+		</p></details>
+
+	<p class="max-w-prose leading-normal">You can try other news feeds <select class="inline-block text-xs bg-gray-200 border border-gray-200 text-gray-700 px-0 py-0 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"><option value="https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml">NYTimes</option><option value="https://www.sfgate.com/bayarea/feed/Bay-Area-News-429.php">SF Gate Bay Area</option><option value="https://feeds.bbci.co.uk/news/rss.xml">BBC News</option><option value="https://www.buzzfeed.com/world.xml">Buzz Feed World</option><option value="https://aljazeera.com/xml/rss/all.xml">Al Jazeera</option><option value="https://hnrss.org/frontpage">Hacker News Front Page</option><option value="https://www.reddit.com/r/worldnews/.rss">Reddit World News</option></select>; however the NYTimes feed comes with more information than the other feeds, such as
+		the thumbnail image, author, and more.
+	</p>
+	<div class="py-4"></div>
+	<button class="bg-emerald-600 hover:bg-zinc-300 text-white font-bold py-2 px-4 rounded">Sorted by positive scores</button>
+	
+		<div class="py-4"><svg class="animate-spin inline-block" width="25" height="25" viewBox="0 0 100 100"><path d="M0,50 a1,1 0 0,0 100,0" fill="lightgrey"></path></svg>
+			Loading feed and running sentiment analysis on headlines...
+		</div>
+	</article>
+
+
+		<script type="module" data-hydrate="15446j3">
+		import { start } from "/static/_app/start-ad0dbeae.js";
+		start({
+			target: document.querySelector('[data-hydrate="15446j3"]').parentNode,
+			paths: {"base":"/static","assets":"/static"},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/static/_app/pages/__layout.svelte-483b60b6.js"),
+						import("/static/_app/pages/index.svelte-a06f0dfd.js")
+				],
+				url: new URL("http://sveltekit-prerender/static"),
+				params: {}
+			}
+		});
+	</script></div>
+	</body>
+</html>
