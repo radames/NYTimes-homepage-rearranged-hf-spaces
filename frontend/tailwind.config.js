@@ -1,5 +1,9 @@
-module.exports = {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{svelte,js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       typography: {
@@ -17,4 +21,4 @@ module.exports = {
     },
   },
   plugins: [require('@tailwindcss/typography')]
-};
+}

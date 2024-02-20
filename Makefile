@@ -1,5 +1,3 @@
-install-node:
-	./install-node.sh
 build-client:
 	cd client && npm install && npm run build && pwd && rm -r ../static && cp -r dist/ ../static/
 build-client-dev:

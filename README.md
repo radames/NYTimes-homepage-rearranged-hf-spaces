@@ -1,10 +1,10 @@
 ---
-title: NYTimes Homepage Sentiment Analysis 
+title: NYTimes Homepage Sentiment Analysis
 emoji: 📰
 colorFrom: red
 colorTo: green
-sdk: gradio
-app_file: main.py
+sdk: docker
+app_port: 7860
 pinned: false
 ---
 
@@ -25,4 +25,3 @@ Because the Spaces run a python application, see [`app_file`](https://huggingfa
 #### SvelteKit Node Adapter?
 
 SvelteKit eventually can be used as our primary web application with [`@sveltejs/adapter-node`](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) adaptor and Flask the API application with your ML project. However, there is an unsolved issue to enable [dynamic basepath](https://github.com/sveltejs/kit/issues/595), which blocks the possibility to embedded deployment or using a relative path.
-

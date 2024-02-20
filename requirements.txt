@@ -1,7 +1,7 @@
-feedparser==6.0.8
-Flask==2.0.3
-flask_cors==3.0.10
-python-dotenv==0.19.2
+feedparser==6.0.11
+Flask==3.0.2
+flask_cors==4.0.0
+python-dotenv==1.0.1
 python_dateutil==2.8.2
-transformers==4.16.2
-torch
+transformers==4.37.2
+torch==2.2.0

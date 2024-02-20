@@ -1,5 +1,5 @@
 <script>
-	import NewsBlock from '../components/NewsBlock.svelte';
+	import NewsBlock from './components/NewsBlock.svelte';
 	let feeds = [
 		{
 			label: 'NYTimes',
@@ -37,10 +37,10 @@
 	async function fecthPredictions(feedUrl) {
 		console.log(feedUrl);
 		try {
-			predictions = await fetch(`news?feed_url=${feedUrl}`).then((d) => d.json());
+			predictions = await fetch(`/api/news?feed_url=${feedUrl}`).then((d) => d.json());
 		} catch (e) {
 			// hack to develop locally without having to run the server
-			predictions = await fetch('static/test.json').then((d) => d.json());
+			predictions = await fetch('test.json').then((d) => d.json());
 		}
 		lastUpdate = new Date(predictions.last_update);
 		predictions = predictions.entries.sort((a, b) => b.sentiment - a.sentiment);
@@ -108,8 +108,8 @@
 				>Node script</a
 			>
 
-			install node LTS and create symbolic links to <code>/home/user/.local/bin/</code> as it seems like
-			we don't have permission to update <code>$PATH</code> env
+			install node LTS and create symbolic links to <code>/home/user/.local/bin/</code> as it seems
+			like we don't have permission to update <code>$PATH</code> env
 		</p>
 		<h4>main.py</h4>
 		<p class="max-w-prose leading-normal">
@@ -141,8 +141,9 @@
 				href="https://github.com/sveltejs/kit/tree/master/packages/adapter-node"
 			>
 				<code>@sveltejs/adapter-node</code></a
-			> adaptor and Flask the API application with your ML project. However, there is an unsolved
-			issue to enable
+			>
+			adaptor and Flask the API application with your ML project. However, there is an unsolved issue
+			to enable
 			<a
 				href="https://github.com/sveltejs/kit/issues/595"
 				class="text-blue-500 underline hover:no-underline"
